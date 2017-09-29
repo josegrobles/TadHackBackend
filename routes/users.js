@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var redis = require("redis");
-var client = redis.createClient({url: process.env.REDIS_URL});
+var client = redis.createClient(process.env.REDIS_URL);
 
 
 /* GET users listing. */
