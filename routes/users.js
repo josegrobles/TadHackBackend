@@ -18,4 +18,15 @@ router.post('/login', function(req, res, next) {
   })
 });
 
+router.post('/check',function(req,res,next){
+  let body = req.body
+  let number = body['number']
+  number = number.substring(1,number.length)
+  let code = req.body['code']
+  client.srem(number,code,function(err,replies){
+    console.log(replies)
+    res.end('ok')
+  })
+})
+
 module.exports = router;
