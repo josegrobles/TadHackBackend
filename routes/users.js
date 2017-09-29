@@ -24,7 +24,7 @@ router.post('/check',function(req,res,next){
   number = number.substring(1,number.length)
   let code = req.body['code']
   client.srem(number,code,function(err,replies){
-    if replies == 1{
+    if (replies == 1){
       res.end("ok")
     }else{
       res.end("notok")
