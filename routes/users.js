@@ -43,7 +43,9 @@ router.post('/upload',function(req,res,next){
 
   uploadFile(video.data,video.name)
 
-  res.end('ok')
+  client.incr("case_id",function(err,replies){
+    res.end(replies)
+  })
 
 })
 
