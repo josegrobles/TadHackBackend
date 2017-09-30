@@ -44,6 +44,7 @@ router.post('/upload',function(req,res,next){
   uploadFile(video.data,video.name)
 
   client.incr("case_id",function(err,replies){
+    client.hset(replies.toString(),"url","https://s3.eu-central-1.amazonaws.com/frontierstranslate/test/"+video.name)
     res.end(replies.toString())
   })
 

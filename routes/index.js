@@ -7,3 +7,8 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+router.post('/add',function(req,res,next){
+  console.log(req.body)
+  res.end('ok')
+})
