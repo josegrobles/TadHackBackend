@@ -18,8 +18,11 @@ router.post('/add',function(req,res,next){
 })
 
 router.get('/getLast',function(req,res,next){
+  var id = 0
   client.get("case_id",function(error,replies){
+    id = replies
     client.hgetall(replies.toString(),function(err,replies){
+      replies["id"] = id
       console.log(err,replies)
       res.end(JSON.stringify(replies))
     })
