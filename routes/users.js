@@ -34,7 +34,14 @@ router.post('/check',function(req,res,next){
 
 router.post('/upload',function(req,res,next){
   console.log(req.files)
-  res.end('ok')
+  let video = req.files.video
+
+  video.mv('/app/'+video.name, function(err) {
+    if (err) console.log(err)
+
+    res.end('ok')
+  })
+
 })
 
 module.exports = router;
