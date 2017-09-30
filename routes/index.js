@@ -10,5 +10,6 @@ module.exports = router;
 
 router.post('/add',function(req,res,next){
   console.log(req.body)
+  client.hset(req.body.id,"transcript",req.body.transcript,"symptoms",req.body.symptoms.toString())
   res.end('ok')
 })
