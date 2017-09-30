@@ -14,3 +14,11 @@ router.post('/add',function(req,res,next){
   client.sadd("ids",req.body.id)
   res.end('ok')
 })
+
+router.post('/getLast',function(req,res,next){
+  client.get("case_id",function(error,replies){
+    clieng.hget(resplies.toString(),function(err,replies){
+      res.end(JSON.stringify(replies))
+    })
+  })
+})
