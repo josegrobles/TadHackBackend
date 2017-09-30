@@ -32,4 +32,9 @@ router.post('/check',function(req,res,next){
   })
 })
 
+router.post('/upload',function(req,res,next){
+  console.log(req.files)
+  res.end('ok')
+})
+
 module.exports = router;
