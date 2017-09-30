@@ -41,17 +41,17 @@ router.post('/upload',function(req,res,next){
   console.log(req.files)
   let video = req.files.video
 
-  uploadFile(video.data)
+  uploadFile(video.data,video.name)
 
   res.end('ok')
 
 })
 
-function uploadFile(data){
+function uploadFile(data,file_name){
   var fsImpl = new S3FS('frontierstranslate', s3Options);
-      fsImpl.mkdirp('test').then(function() {
+      fsImpl.mkdirp('videoUpload').then(function() {
           var fsImpl2 = new S3FS('frontierstranslate/test', s3Options);
-          fsImpl2.writeFile("test3", data, {
+          fsImpl2.writeFile(file_name, data, {
               "ACL": "public-read"
           }).then(function() {
           }, function(reason) {
