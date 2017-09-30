@@ -19,7 +19,7 @@ router.post('/add',function(req,res,next){
 
 router.get('/getLast',function(req,res,next){
   client.get("case_id",function(error,replies){
-    client.hget(resplies.toString(),function(err,replies){
+    client.hget(replies.toString(),function(err,replies){
       res.end(JSON.stringify(replies))
     })
   })
