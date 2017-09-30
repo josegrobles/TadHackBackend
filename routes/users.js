@@ -3,7 +3,12 @@ var router = express.Router();
 var request = require('request');
 var redis = require("redis");
 var client = redis.createClient(process.env.REDIS_URL);
-
+var S3FS = require('s3fs')
+var s3Options = {
+  accessKeyId: process.env.KEY_ID,
+  secretAccessKey: process.env.ACCESS_KEY,
+  region: 'eu-central-1',
+};
 
 /* GET users listing. */
 router.post('/login', function(req, res, next) {
@@ -36,12 +41,25 @@ router.post('/upload',function(req,res,next){
   console.log(req.files)
   let video = req.files.video
 
-  video.mv('/app/'+video.name, function(err) {
-    if (err) console.log(err)
+  uploadFile(video.data)
 
-    res.end('ok')
-  })
+  res.end('ok')
 
 })
 
+function uploadFile(data){
+  var fsImpl = new S3FS('frontierstranslate', s3Options);
+      fsImpl.mkdirp('test').then(function() {
+          var fsImpl2 = new S3FS('frontierstranslate/test', s3Options);
+          fsImpl2.writeFile("test3", data, {
+              "ACL": "public-read"
+          }).then(function() {
+          }, function(reason) {
+              console.log(reason)
+          });
+      }, function(reason) {
+          console.log(reason)
+
+      });
+}
 module.exports = router;
